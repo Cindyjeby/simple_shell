@@ -49,7 +49,7 @@ return (len);
  */
 void signal_handler(int signo)
 {
-	if (signo ==SIGINT)
+	if (signo == SIGINT)
 	{
 		_print("\n");
 		_print(PROMPT);
