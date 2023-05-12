@@ -3,7 +3,7 @@
 #define DELIMITER " \n\t\r\a\v"
 
 /**
- * split_line - splits line to tokens
+ * split_line - split line to tokens
  * @data: a pointer to the struct of data
  *
  * Return: on success - a positive number
