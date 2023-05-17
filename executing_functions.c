@@ -109,7 +109,7 @@ int builtin_handler(cmd_data *d)
 {
 	built_t built[] = {
 		{"exit", program_abort},
-		{"cd", change_dir},
+		{"cd", directory_changer},
 		{"help", help_displayer},
 		{NULL, NULL}
 	};
