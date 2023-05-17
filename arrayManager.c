@@ -10,14 +10,14 @@
  */
 void *fill_array(void *array, int element, unsigned int length)
 {
-    char *ptr = array;
-    
-    for (unsigned int i = 0; i < length; i++)
-    {
-        *ptr = element;
-        ptr++;
-    }
-    
-    return (array);
+
+	char *ptr = array;
+
+	for (unsigned int i = 0; i < length; i++)
+	{
+		*ptr = element;
+		ptr++;
+	}
+	return (array);
 }
 

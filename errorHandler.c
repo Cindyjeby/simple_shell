@@ -42,16 +42,16 @@ void signal_handler(int signo);
  */
 int print_error(cmd_data *data)
 {
-    char *index_str = convert_to_string(data->index);
+	char *index_str = convert_to_string(data->index);
 
-    _print("hsh: ");
-    _print(index_str);
-    _print(": ");
-    _print(data->args[0]);
-    _print(": ");
-    _print(data->error_msg);
-    free(index_str);
-    return (0);
+	_print("hsh: ");
+	_print(index_str);
+	_print(": ");
+	_print(data->args[0]);
+	_print(": ");
+	_print(data->error_msg);
+	free(index_str);
+	return (0);
 }
 
 /**
@@ -62,18 +62,19 @@ int print_error(cmd_data *data)
  */
 char *convert_to_string(unsigned int num)
 {
-    int len = calculate_length(num);
-    char *str = malloc(len + 1);
-    if (!str)
-        return (NULL);
+	int len = calculate_length(num);
+	char *str = malloc(len + 1);
 
-    str[len] = '\0';
-    for (int i = len - 1; i >= 0; i--)
-    {
-        str[i] = (num % 10) + '0';
-        num /= 10;
-    }
-    return (str);
+	if (!str)
+		return (NULL);
+
+	str[len] = '\0';
+	for (int i = len - 1; i >= 0; i--)
+	{
+		str[i] = (num % 10) + '0';
+		num /= 10;
+	}
+	return (str);
 }
 
 /**
@@ -84,15 +85,15 @@ char *convert_to_string(unsigned int num)
  */
 int calculate_length(int num)
 {
-    int length = 0;
+	int length = 0;
 
-    if (num == 0)
-        return 1;
+	if (num == 0)
+		return (1);
 
-    for (int temp = num; temp != 0; temp /= 10)
-        length++;
+	for (int temp = num; temp != 0; temp /= 10
+		length++;
 
-    return (length);
+		return (length);
 }
 
 /**
@@ -103,10 +104,9 @@ int calculate_length(int num)
  */
 void signal_handler(int signo)
 {
-    if (signo == SIGINT)
-    {
-        _print("\n");
-        _print(PROMPT);
-    }
+	if (signo == SIGINT)
+	{
+		_print("\n");
+		_print(PROMPT);
+	}
 }
-
