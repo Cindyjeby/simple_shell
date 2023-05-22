@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include "main.h"
+#include "shell.h"
 
 /**
  * main - entry to the program
@@ -10,66 +10,66 @@
  */
 int main(void)
 {
-	cmd_data data;
+	command_data d;
 	int pl;
 
-	_resetMemory((void *)&data, 0, sizeof(data));
+	_resetMemory((void *)&d, 0, sizeof(d));
 	signal(SIGINT, signal_handler);
 	while (1)
 	{
 		data.index++;
 		/* Read user input */
-		while (readInput(&data) >= 0)
+		while (readInput(&d) >= 0)
 		{
 			/* Split the input into separate arguments */
-			while (split_line(&data) >= 0)
+			while (split_line(&d) >= 0)
 			{
 				/* Parse the cmd line and check for errors */
-				pl = parse_line(&data);
+				pl = parse_line(&d);
 				if (pl == 0)
 				{
-					free_data(&data);
+					free_data(&d);
 					break;
 				}
 				if (pl < 0)
 				{
-					print_error(&data);
+					print_error(&d);
 					continue;
 				}
 				/* Process the command and execute it */
-				if (process_cmd(&data) < 0)
+				if (process_command(&d) < 0)
 				{
-					print_error(&data);
+					print_error(&d);
 					break;
 				}
-				free_data(&data);
+				free_data(&d);
 			}
 		}
 		if (isatty(STDIN_FILENO))
 			_print("\n");
 		break; }
-	free_data(&data);
+	free_data(&d);
 	return (0);
 }
 
 /**
  * readInput - Reads user input and stores data in 'data'
- * @data: Memory location of our storage container
+ * @d: Memory location of our storage container
  * Return: 0 if success and -1 if error
  */
-int readInput(cmd_data *data)
+int readInput(command_data *d)
 {
 	char *csr_ptr, *end_ptr, c;
 	size_t size = BUFSIZE, read_st, length, new_size;
 
-	data->line = malloc(size * sizeof(char));
-	if (data->line == NULL)
+	d->line = malloc(size * sizeof(char));
+	if (d->line == NULL)
 		return (-1);
 
 	if (isatty(STDIN_FILENO))
 		_print(PROMPT);
 
-	for (csr_ptr = data->line, end_ptr = data->line + size;;)
+	for (csr_ptr = d->line, end_ptr = d->line + size;;)
 	{
 		read_st = read(STDIN_FILENO, &c, 1);
 		if (read_st == 0)
@@ -86,27 +86,26 @@ int readInput(cmd_data *data)
 		if (csr_ptr + 2 >= end_ptr)
 		{
 			new_size = size * 2;
-			length = csr_ptr - data->line;
-			data->line = _realloc(data->line, size * sizeof(char),
+			length = csr_ptr - d->line;
+			d->line = _realloc(d->line, size * sizeof(char),
 					new_size * sizeof(char));
-			if (data->line == NULL)
+			if (d->line == NULL)
 				return (-1);
 
 			size = new_size;
-			end_ptr = data->line + size;
-			csr_ptr = data->line + length;
+			end_ptr = d->line + size;
+			csr_ptr = d->line + length;
 		}
 	}
 }
 
 /**
- * process_cmd - Process command and execute process
- * @data: Pointer to the struct of data
- *
+ * process_command - Process command and execute process
+ * @d: Pointer to the struct of data
  * Return: (Success) a positive number
- * ------- (Fail) a negative number
+ * (Fail) a negative number
  */
-int process_cmd(cmd_data *data)
+int process_command(command_data *d)
 {
 	pid_t pid;
 	int status;
@@ -117,9 +116,9 @@ int process_cmd(cmd_data *data)
 		signal(SIGINT, SIG_DFL);
 
 		/* Execute the command */
-		if (execve(data->cmd, data->args, environ) < 0)
+		if (execve(d->command, d->args, environ) < 0)
 		{
-			data->error_msg = _strdup("not found\n");
+			d->error_msg = _strdup("not found\n");
 			return (-1);
 		}
 	}
