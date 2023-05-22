@@ -71,18 +71,18 @@ int program_abort(void *d);
 int directory_changer(command *d);
 
 void *fill_array(void *array, int element, unsigned int length);
-int split_line(cmd_data *data);
-int free_data(cmd_data *data);
-int parse_line(cmd_data *data);
+int split_line(command_data *d);
+int free_data(command_data *d);
+int parse_line(command_data *d);
 char *_strcat(char *first, char *second);
 char *_strchr(char *str, char c);
 int compare_string(char *string1, char *string2);
 char *get_environment_variables(char *variable_name);
-void increment_index(cmd_data *data);
-int write_to_history(cmd_data *data __attribute__((unused)));
+void increment_index(command_data *d);
+int write_to_history(command_data *d __attribute__((unused)));
 int is_alphabetic(int character);
 int main(void);
-int readInput(cmd_data *data);
-int process_cmd(cmd_data *data);
+int readInput(command_data *d);
+int process_cmd(command_data *d);
 
 #endif
