@@ -1,40 +1,39 @@
-#include "main.h"
+#include "shell.h"
 
 #define DELIMITER " \n\t\r\a\v"
 
 /**
  * split_line - split line to tokens
  * @data: a pointer to the struct of data
- *
  * Return: on success - a positive number
- *         on failure - a negative number
+ *on failure - a negative number
  */
-int split_line(cmd_data *data)
+int split_line(command_data *d)
 {
 	char *tkn;
 	size_t sz = TOKENSIZE, new_sz, i = 0;
 
-	if (_strcmp(data->line, "\n") == 0)
+	if (_strcmp(d->line, "\n") == 0)
 		return (-1);
-	data->arguments = malloc(sz * sizeof(char *));
-	if (data->arguments == NULL)
+	d->args = malloc(sz * sizeof(char *));
+	if (d->args == NULL)
 		return (-1);
-	tkn = strtok(data->line, DELIMITER);
+	tkn = strtok(d->line, DELIMITER);
 	while (tkn != NULL)
 	{
-		data->arguments[i++] = tkn;
+		d->args[i++] = tkn;
 		if (i + 2 >= sz)
 		{
 			new_sz = sz * 2;
-			data->arguments = _realloc(data->arguments,
+			d->args = _realloc(d->args,
 					sz * sizeof(char *), new_sz * sizeof(char *));
-			if (data->arguments == NULL)
+			if (d->args == NULL)
 				return (-1);
 			sz = new_sz;
 		}
 		tkn = strtok(NULL, DELIMITER);
 	}
-	data->arguments[i] = NULL;
+	d->args[i] = NULL;
 	return (0);
 }
 
@@ -43,20 +42,19 @@ int split_line(cmd_data *data)
 /**
  * free_data - frees data
  * @data: the data structure
- *
  * Return: on success - positive number
- *         on failure - negative number
+ * on failure - negative number
  */
-int free_data(cmd_data *data)
+int free_data(command_data *d)
 {
-	free(data->line);
-	data->line = NULL;
-	free(data->arguments);
-	data->arguments = NULL;
-	free(data->command);
-	data->command = NULL;
-	free(data->error_msg);
-	data->error_msg = NULL;
+	free(d->line);
+	d->line = NULL;
+	free(d->args);
+	d->args = NULL;
+	free(d->command);
+	d->command = NULL;
+	free(d->error_msg);
+	d->error_msg = NULL;
 	return (0);
 }
 
@@ -65,23 +63,22 @@ int free_data(cmd_data *data)
 /**
  * parse_line - parses arguments to valid command
  * @data: a pointer to the struct of data
- *
  * Return: on success - a positive number
- *         on failure - a negative number
+ * on failure - a negative number
  */
-int parse_line(cmd_data *data)
+int parse_line(command_data *d)
 {
-	while (is_path_form(data) > 0)
+	while (is_path_form(d) > 0)
 		return (1);
 
-	while (is_builtin(data) > 0)
+	while (is_builtin(d) > 0)
 	{
-		if (handle_builtin(data) < 0)
+		if (handle_builtin(d) < 0)
 			return (-1);
 		return (0);
 	}
 
-	is_short_form(data);
+	is_short_form(d);
 	return (1);
 }
 
@@ -91,9 +88,8 @@ int parse_line(cmd_data *data)
  * _strcat - concatenates two strings in a path form
  * @first: the first given destination
  * @second: the second given source
- *
  * Return: (Success) the newly concatenated string
- *         (Fail) if it fails
+ * (Fail) if it fails
  */
 char *_strcat(char *first, char *second)
 {
@@ -123,9 +119,8 @@ char *_strcat(char *first, char *second)
  * _strchr - locates a character in a given string
  * @str: the given string
  * @c: the character
- *
  * Return: on success - a pointer to the first occurrence of c
- *         on failure - a null pointer
+ * on failure - a null pointer
  */
 char *_strchr(char *str, char c)
 {

@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 /**
  * fill_array - fill an array with elements
@@ -20,4 +20,3 @@ void *fill_array(void *array, int element, unsigned int length)
 	}
 	return (array);
 }
-

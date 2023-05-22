@@ -1,10 +1,10 @@
-#include "main.h"
+#include "shell.h"
 /**
  * help_displayer - function used to display the help menu
  * @d: is a pointer to the data structure
  * Return: 0 (success) or negative number (failure)
  */
-int help_displayer(cmd_data *d)
+int help_displayer(command_data *d)
 {
 	int reading, writting, fd = 1;
 	char k;
@@ -58,7 +58,7 @@ int program_abort(void *d)
  * @d: is a pointer to the data
  * Return: 0 (success) or -1 (failure)
  */
-int directory_changer(cmd *d)
+int directory_changer(command *d)
 {
 	char *main;
 	char *old;
@@ -105,7 +105,7 @@ int directory_changer(cmd *d)
  * @d: a pointer to the data structure
  * Return: 0 (success) -1 (failure)
  */
-int builtin_handler(cmd_data *d)
+int builtin_handler(command_data *d)
 {
 	built_t built[] = {
 		{"exit", program_abort},
