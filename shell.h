@@ -1,5 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef SHELL_H
+#define SHELL_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -53,18 +53,18 @@ typedef struct builtin
 
 extern char **environ;
 
-int _strlen(char *str);
-void _print(char *outputstr);
-char *_strdup(char *str);
-void array_rev(char *array, int length);
-char *_strcpy(char *destination, char *source);
-char *_resetmemory(char *p, char byte, unsigned int first);
-void *_realloc(void *ptr, unsigned int old, unsigned int new);
-char *_memcpy(char *destination, char *source, unsigned int num);
+int string_length(char *str);
+void print_out(char *outputstr);
+char *string_dup(char *str);
+void reverse_array(char *array, int length);
+char *string_copy(char *destination, char *source);
+char *memory_reset(char *p, char byte, unsigned int first);
+void *memory_resize(void *ptr, unsigned int old, unsigned int new);
+char *memory_copy(char *destination, char *source, unsigned int num);
 int _pathfinder(command_data *d);
 void _short(command_data *d);
 int _bultin(command_data *d);
-int _atoi(char *cha);
+int string_integer(char *cha);
 int builtin_handler(command_data *d);
 int help_displayer(command_data *d);
 int program_abort(void *d);

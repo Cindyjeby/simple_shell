@@ -4,7 +4,7 @@
 
 /**
  * split_line - split line to tokens
- * @data: a pointer to the struct of data
+ * @d: a pointer to the struct of data
  * Return: on success - a positive number
  *on failure - a negative number
  */
@@ -41,7 +41,7 @@ int split_line(command_data *d)
 
 /**
  * free_data - frees data
- * @data: the data structure
+ * @d: the data structure
  * Return: on success - positive number
  * on failure - negative number
  */
@@ -62,7 +62,7 @@ int free_data(command_data *d)
 
 /**
  * parse_line - parses arguments to valid command
- * @data: a pointer to the struct of data
+ * @d: a pointer to the struct of data
  * Return: on success - a positive number
  * on failure - a negative number
  */

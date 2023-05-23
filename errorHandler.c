@@ -2,7 +2,7 @@
 
 /**
  * print_error - prints error message
- * @: the data structure pointer
+ * @d: the data structure pointer
  * Return: (Success) a positive number
  *(Fail) a negative number
  */
@@ -31,7 +31,7 @@ void signal_handler(int signo);
 
 /**
  * print_error - prints error message
- * @data: the data structure pointer
+ * @d: the data structure pointer
  * Return: (Success) a positive number
  * (Fail) a negative number
  */
