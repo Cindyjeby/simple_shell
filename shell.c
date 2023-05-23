@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
 #include "shell.h"
 
 /**
@@ -13,7 +9,7 @@ int main(void)
 	command_data d;
 	int pl;
 
-	_resetMemory((void *)&d, 0, sizeof(d));
+	memory_reset((void *)&d, 0, sizeof(d));
 	signal(SIGINT, signal_handler);
 	while (1)
 	{
@@ -46,7 +42,7 @@ int main(void)
 			}
 		}
 		if (isatty(STDIN_FILENO))
-			_print("\n");
+			print_out("\n");
 		break; }
 	free_data(&d);
 	return (0);
@@ -67,7 +63,7 @@ int readInput(command_data *d)
 		return (-1);
 
 	if (isatty(STDIN_FILENO))
-		_print(PROMPT);
+		print_out(PROMPT);
 
 	for (csr_ptr = d->line, end_ptr = d->line + size;;)
 	{
@@ -87,7 +83,7 @@ int readInput(command_data *d)
 		{
 			new_size = size * 2;
 			length = csr_ptr - d->line;
-			d->line = _realloc(d->line, size * sizeof(char),
+			d->line = memory_resize(d->line, size * sizeof(char),
 					new_size * sizeof(char));
 			if (d->line == NULL)
 				return (-1);
@@ -118,7 +114,7 @@ int process_command(command_data *d)
 		/* Execute the command */
 		if (execve(d->command, d->args, environ) < 0)
 		{
-			d->error_msg = _strdup("not found\n");
+			d->error_msg = string_dup("not found\n");
 			return (-1);
 		}
 	}

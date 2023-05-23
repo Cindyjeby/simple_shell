@@ -13,7 +13,7 @@ int split_line(command_data *d)
 	char *tkn;
 	size_t sz = TOKENSIZE, new_sz, i = 0;
 
-	if (_strcmp(d->line, "\n") == 0)
+	if (compare_string(d->line, "\n") == 0)
 		return (-1);
 	d->args = malloc(sz * sizeof(char *));
 	if (d->args == NULL)
@@ -25,7 +25,7 @@ int split_line(command_data *d)
 		if (i + 2 >= sz)
 		{
 			new_sz = sz * 2;
-			d->args = _realloc(d->args,
+			d->args = memory_resize(d->args,
 					sz * sizeof(char *), new_sz * sizeof(char *));
 			if (d->args == NULL)
 				return (-1);
@@ -68,17 +68,17 @@ int free_data(command_data *d)
  */
 int parse_line(command_data *d)
 {
-	while (is_path_form(d) > 0)
+	while (_pathfinder(d) > 0)
 		return (1);
 
-	while (is_builtin(d) > 0)
+	while (_builtin(d) > 0)
 	{
-		if (handle_builtin(d) < 0)
+		if (builtin_handler(d) < 0)
 			return (-1);
 		return (0);
 	}
 
-	is_short_form(d);
+	_short(d);
 	return (1);
 }
 
@@ -96,8 +96,8 @@ char *_strcat(char *first, char *second)
 	int len1, len2, i = 0, j = 0;
 	char *result;
 
-	len1 = _strlen(first);
-	len2 = _strlen(second);
+	len1 = string_length(first);
+	len2 = string_length(second);
 	result = malloc((len1 + len2 + 2) * sizeof(char));
 
 	if (!result)

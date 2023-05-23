@@ -8,7 +8,7 @@ int _pathfinder(command_data *d)
 {
 	if (_strchr(d->args[0], '/') != NULL)
 	{
-		d->command = _strdup(d->args[0]);
+		d->command = string_dup(d->args[0]);
 		return (1);
 	}
 	return (-1);
@@ -25,8 +25,8 @@ void _short(command_data *d)
 	struct stat s;
 	int exit = 0;
 
-	start = _getenv("PATH");
-	end = _strdup(start);
+	start = get_environment_variable("PATH");
+	end = string_dup(start);
 	ticket = strtok(end, DELIMITER);
 
 	while (token)
@@ -42,7 +42,7 @@ void _short(command_data *d)
 	}
 	if (!exit)
 	{
-		d->command = _strdup(d->args[0]);
+		d->command = string_dup(d->args[0]);
 	}
 	free(end);
 }
@@ -64,18 +64,18 @@ int _builtin(command_data *d)
 
 	while (builtins[k] != NULL)
 	{
-		if (_strcmp(d->args[0], builtins[k]) == 0)
+		if (compare_string(d->args[0], builtins[k]) == 0)
 			return (1);
 		k++;
 	}
 	return (0);
 }
 /**
- * _atoi - function that converts chars to ints
+ * string_integer - function that converts chars to ints
  * @cha: the char to be changed
  * Return: an interger
  */
-int _atoi(char *cha)
+int string_integer(char *cha)
 {
 	int value = 0;
 	int sign = 1;

@@ -1,11 +1,11 @@
 #include "shell.h"
 
 /**
- * _strlen - function that calculates the lenght of a given string
+ * string_length - function that calculates the length of a given string
  * @str: the string to be calculated
  * Return: the length of the string or -1 (failure)
  */
-int _strlen(char *str)
+int string_length(char *str)
 {
 	int length = 0;
 
@@ -16,11 +16,11 @@ int _strlen(char *str)
 	return (length);
 }
 /**
- * _print - function that prints a string to stdout
+ * print_out - function that prints a string to stdout
  * @outputstr: string to be printed
  * Return: 0 (sucess) -1 (failure)
  */
-void _print(char *outputstr)
+void print_out(char *outputstr)
 {
 	int length = 0;
 
@@ -32,11 +32,11 @@ void _print(char *outputstr)
 	write(STDOUT_FILENO, outputstr, length);
 }
 /**
- * _strdup - function that duplicates a given string
+ * string_dup - function that duplicates a given string
  * @str: string
  * Return: the address of the given string or NULL
  */
-char *_strdup(char *str)
+char *string_dup(char *str)
 {
 	char *dup;
 	int length, k;
@@ -44,7 +44,7 @@ char *_strdup(char *str)
 	if (!str)
 		return (NULL);
 
-	length = _strlen(str);
+	length = string_length(str);
 	dup = malloc(length + 1);
 
 	if (!dup)
@@ -58,12 +58,12 @@ char *_strdup(char *str)
 	return (dup);
 }
 /**
- * array_rev - function that reverses array
+ * reverse_array - function that reverses array
  * @array: the given array
  * @length: lenght of the array
  * Return: void
  */
-void array_rev(char *array, int length)
+void reverse_array(char *array, int length)
 {
 	int k = 0;
 	int j = length - 1;
@@ -79,12 +79,12 @@ void array_rev(char *array, int length)
 	}
 }
 /**
- * _strcpy - function that copies a string
+ * string_copy - function that copies a string
  * @source: the source of the stirng
  * @destination: destination of the string
  * Return: pointer to the destination
  */
-char *_strcpy(char *destination, char *source)
+char *string_copy(char *destination, char *source)
 {
 	int k = 0;
 

@@ -39,12 +39,12 @@ int print_error(command_data *d)
 {
 	char *index_str = convert_to_string(d->index);
 
-	_print("hsh: ");
-	_print(index_str);
-	_print(": ");
-	_print(d->args[0]);
-	_print(": ");
-	_print(d->error_msg);
+	print_out("hsh: ");
+	print_out(index_str);
+	print_out(": ");
+	print_out(d->args[0]);
+	print_out(": ");
+	print_out(d->error_msg);
 	free(index_str);
 	return (0);
 }
@@ -98,7 +98,7 @@ void signal_handler(int signo)
 {
 	if (signo == SIGINT)
 	{
-		_print("\n");
-		_print(PROMPT);
+		print_out("\n");
+		print_out(PROMPT);
 	}
 }
