@@ -68,7 +68,7 @@ int string_integer(char *cha);
 int builtin_handler(command_data *d);
 int help_displayer(command_data *d);
 int program_abort(void *d);
-int directory_changer(command *d);
+int directory_changer(command_data *d);
 
 void *fill_array(void *array, int element, unsigned int length);
 int split_line(command_data *d);

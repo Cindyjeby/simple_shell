@@ -11,8 +11,9 @@ void *fill_array(void *array, int element, unsigned int length)
 {
 
 	char *ptr = array;
+	unsigned int i;
 
-	for (unsigned int i = 0; i < length; i++)
+	for (i = 0; i < length; i++)
 	{
 		*ptr = element;
 		ptr++;
