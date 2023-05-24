@@ -71,21 +71,21 @@ int program_abort(command_data *d __attribute__((unused)));
 int directory_changer(command_data *d);
 
 void *fill_array(void *array, int element, unsigned int length);
-<<<<<<< HEAD:main.h
+
 int split_line(command_data *data);
 int free_data(command_data *data);
 int parse_line(command_data *data);
-=======
+
 int split_line(command_data *d);
 int free_data(command_data *d);
 int parse_line(command_data *d);
->>>>>>> bc021ea058083abfa0e2980919e58e173c9d034c:shell.h
+
 char *_strcat(char *first, char *second);
 char *_strchr(char *str, char c);
 int _strcmp(char *s1, char *s2);
 int compare_string(char *string1, char *string2);
 char *get_environment_variables(char *variable_name);
-<<<<<<< HEAD:main.h
+
 void increment_index(command_data *data);
 int write_to_history(command_data *data __attribute__((unused)));
 int is_alphabetic(int character);
@@ -97,19 +97,17 @@ int handle_builtin(command_data *data);
 int is_builtin(command_data *data);
 void is_short_form(command_data *data);
 int is_path_form(command_data *data);
-=======
+
 void increment_index(command_data *d);
 int write_to_history(command_data *d __attribute__((unused)));
 int is_alphabetic(int character);
 int main(void);
 int readInput(command_data *d);
-<<<<<<< HEAD
+
 int process_cmd(command_data *d);
->>>>>>> bc021ea058083abfa0e2980919e58e173c9d034c:shell.h
-=======
+
 int process_command(command_data *d);
 void signal_handler(int signo);
 int print_error(command_data *d);
->>>>>>> 0f3cf1153355bd967a8ba385a86910daffb6ad71
 
 #endif
