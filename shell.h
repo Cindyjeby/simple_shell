@@ -84,5 +84,7 @@ int is_alphabetic(int character);
 int main(void);
 int readInput(command_data *d);
 int process_command(command_data *d);
+void signal_handler(int signo);
+int print_error(command_data *d);
 
 #endif
