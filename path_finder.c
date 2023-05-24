@@ -25,20 +25,19 @@ void _short(command_data *d)
 	struct stat s;
 	int exit = 0;
 
-	start = get_environment_variable("PATH");
+	start = get_environment_variables("PATH");
 	end = string_dup(start);
 	ticket = strtok(end, DELIMITER);
 
-	while (token)
+	while (ticket)
 	{
-		d->command + _strcat(ticket, d->args[0]);
-		if (stat(d->command, &s) == 0)
+		if (compare_string(ticket, d->args[0]) == 0)
 		{
 			exit = 1;
 			break;
 		}
-		free(d->command);
-		ticket = strtok(NULL, DELIMETER);
+		free(ticket);
+		ticket = strtok(NULL, DELIMITER);
 	}
 	if (!exit)
 	{
@@ -54,7 +53,7 @@ void _short(command_data *d)
  */
 int _builtin(command_data *d)
 {
-	char *buitins[] = {
+	char *builtins[] = {
 		"exit",
 		"cd",
 		"help",

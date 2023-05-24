@@ -13,7 +13,7 @@ int main(void)
 	signal(SIGINT, signal_handler);
 	while (1)
 	{
-		data.index++;
+		d.index++;
 		/* Read user input */
 		while (readInput(&d) >= 0)
 		{
