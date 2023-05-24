@@ -32,7 +32,7 @@ int help_displayer(command_data *d)
  * @d: is a pointer to the data structure
  * Return: 0 (success) or -1 (failure)
  */
-int program_abort(void *d)
+int program_abort(command_data *d __attribute__ ((unused)))
 {
 	int input, k;
 
@@ -58,7 +58,7 @@ int program_abort(void *d)
  * @d: is a pointer to the data
  * Return: 0 (success) or -1 (failure)
  */
-int directory_changer(command *d)
+int directory_changer(command_data *d)
 {
 	char *main;
 	char *old;
@@ -71,7 +71,7 @@ int directory_changer(command *d)
 		print_out("change current directory to main directory\n");
 		if (chdir(main) < 0)
 		{
-			print_out("failed to change directory"\n);
+			print_out("failed to change directory\n");
 			return (-1);
 		}
 	}

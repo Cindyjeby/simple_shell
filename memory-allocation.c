@@ -43,7 +43,7 @@ void *memory_resize(void *p, unsigned int old, unsigned int new)
 		return (NULL);
 	if (!p)
 	{
-		fill_an_array(answer, p, old);
+		fill_array(answer, (int)(size_t)p, old);
 	}
 	else
 	{
