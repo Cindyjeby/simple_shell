@@ -33,7 +33,7 @@ typedef struct data_struct
 	char *old;
 	char *command;
 	unsigned long int index;
-	char **args;
+	char **arguments;
 	char *env;
 	char *line;
 	char *error_msg;
@@ -68,21 +68,27 @@ int _atoi(char *cha);
 int builtin_handler(command_data *d);
 int help_displayer(command_data *d);
 int program_abort(void *d);
-int directory_changer(command *d);
+int directory_changer(command_data *d);
 
 void *fill_array(void *array, int element, unsigned int length);
-int split_line(cmd_data *data);
-int free_data(cmd_data *data);
-int parse_line(cmd_data *data);
+int split_line(command_data *data);
+int free_data(command_data *data);
+int parse_line(command_data *data);
 char *_strcat(char *first, char *second);
 char *_strchr(char *str, char c);
+int _strcmp(char *s1, char *s2);
 int compare_string(char *string1, char *string2);
 char *get_environment_variables(char *variable_name);
-void increment_index(cmd_data *data);
-int write_to_history(cmd_data *data __attribute__((unused)));
+void increment_index(command_data *data);
+int write_to_history(command_data *data __attribute__((unused)));
 int is_alphabetic(int character);
 int main(void);
-int readInput(cmd_data *data);
-int process_cmd(cmd_data *data);
+int readInput(command_data *data);
+int process_cmd(command_data *data);
+
+int handle_builtin(command_data *data);
+int is_builtin(command_data *data);
+void is_short_form(command_data *data);
+int is_path_form(command_data *data);
 
 #endif

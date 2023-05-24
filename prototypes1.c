@@ -9,7 +9,7 @@
  * Return: on success - a positive number
  *         on failure - a negative number
  */
-int split_line(cmd_data *data)
+int split_line(command_data *data)
 {
 	char *tkn;
 	size_t sz = TOKENSIZE, new_sz, i = 0;
@@ -47,7 +47,7 @@ int split_line(cmd_data *data)
  * Return: on success - positive number
  *         on failure - negative number
  */
-int free_data(cmd_data *data)
+int free_data(command_data *data)
 {
 	free(data->line);
 	data->line = NULL;
@@ -69,7 +69,7 @@ int free_data(cmd_data *data)
  * Return: on success - a positive number
  *         on failure - a negative number
  */
-int parse_line(cmd_data *data)
+int parse_line(command_data *data)
 {
 	while (is_path_form(data) > 0)
 		return (1);
