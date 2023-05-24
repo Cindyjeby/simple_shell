@@ -1,12 +1,11 @@
-#include "main.h"
+#include "shell.h"
 
 /**
  * compare_strings - compare two strings
  * @string1: the first given string
  * @string2: the second given string
- *
  * Return: (Success) a positive number
- *         (Fail) a negative number
+ * (Fail) a negative number
  */
 int compare_strings(char *string1, char *string2)
 {
@@ -30,9 +29,8 @@ int compare_strings(char *string1, char *string2)
 /**
  * get_environment_variable - gets the value of an environment variable
  * @variable_name: the name of the environment variable
- *
  * Return: (Success) a pointer to the value of the variable
- *         (Fail) NULL
+ * (Fail) NULL
  */
 char *get_environment_variable(char *variable_name)
 {
@@ -59,23 +57,21 @@ char *get_environment_variable(char *variable_name)
 
 /**
  * increment_index - increment the index
- * @data: a pointer to the data structure
- *
+ * @d: a pointer to the data structure
  * Return: void
  */
-void increment_index(cmd_data *data)
+void increment_index(command_data *d)
 {
-	data->index += 1;
+	d->index += 1;
 }
 
 /**
  * write_to_history - writes a line to the history file
- * @data: the data structure pointer
- *
+ * @d: the data structure pointer
  * Return: (Success) 1
- *         (Fail) -1
+ * (Fail) -1
  */
-int write_to_history(cmd_data *data __attribute__((unused)))
+int write_to_history(command_data *d __attribute__((unused)))
 {
 	char *filename = "history";
 	char *line = "this is a line of history";
@@ -101,7 +97,6 @@ int write_to_history(cmd_data *data __attribute__((unused)))
 /**
  * is_alphabetic - check if the input is a letter r
  * @character: the character to be checked
- *
  * Return: 1 if letter, 0 otherwise
  */
 int is_alphabetic(int character)

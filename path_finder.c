@@ -1,48 +1,47 @@
-#include "main.h"
+#include "shell.h"
 /**
  * _pathfinder - checks if the given filename is a path
  * @d: pointer to struct data
- * Return: (sucess) of (failure)
+ * Return: (success) or (failure)
  */
-int _pathfinder(cmd_data *d)
+int _pathfinder(command_data *d)
 {
 	if (_strchr(d->args[0], '/') != NULL)
 	{
-		d->cmd = _strdup(d->args[0]);
+		d->command = string_dup(d->args[0]);
 		return (1);
 	}
 	return (-1);
 }
-define DELIMITER ":"
+#define DELIMITER ":"
 /**
  * _short - function that checks if the given filename is in short form
  * @d: pointer to struct data
  * Return: (success) or (failure)
  */
-void _short(cmd_data *d)
+void _short(command_data *d)
 {
 	char *start, *ticket, *end;
 	struct stat s;
 	int exit = 0;
 
-	start = _getenv("PATH");
-	end = _strdup(start);
+	start = get_environment_variables("PATH");
+	end = string_dup(start);
 	ticket = strtok(end, DELIMITER);
 
-	while (token)
+	while (ticket)
 	{
-		d->cmd + _strcat(ticket, d->args[0]);
-		if (stat(d->cmd, &s) == 0)
+		if (compare_string(ticket, d->args[0]) == 0)
 		{
 			exit = 1;
 			break;
 		}
-		free(d->cmd);
-		tickect = strtok(NULL, DELIMETER);
+		free(ticket);
+		ticket = strtok(NULL, DELIMITER);
 	}
 	if (!exit)
 	{
-		d->cmd = _strdup(d->args[0]);
+		d->command = string_dup(d->args[0]);
 	}
 	free(end);
 }
@@ -52,9 +51,9 @@ void _short(cmd_data *d)
  * @d: is a pointer to the data structure
  * Return: 0 (success) -1 (failure)
  */
-int _builtin(cmd_dat *d)
+int _builtin(command_data *d)
 {
-	char *buitins[] = {
+	char *builtins[] = {
 		"exit",
 		"cd",
 		"help",
@@ -64,18 +63,18 @@ int _builtin(cmd_dat *d)
 
 	while (builtins[k] != NULL)
 	{
-		if (_strcmp(d->args[0], builtins[k]) == 0)
+		if (compare_string(d->args[0], builtins[k]) == 0)
 			return (1);
 		k++;
 	}
 	return (0);
 }
 /**
- * _atoi - function that converts chars to ints
+ * string_integer - function that converts chars to ints
  * @cha: the char to be changed
  * Return: an interger
  */
-int _atoi(char *cha)
+int string_integer(char *cha)
 {
 	int value = 0;
 	int sign = 1;

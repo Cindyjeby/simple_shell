@@ -1,18 +1,16 @@
-#include "main.h"
+#include "shell.h"
 
 /**
  * print_error - prints error message
- * @data: the data structure pointer
- *
+ * @d: the data structure pointer
  * Return: (Success) a positive number
- *         (Fail) a negative number
+ *(Fail) a negative number
  */
-int print_error(cmd_data *data);
+int print_error(command_data *d);
 
 /**
  * convert_to_string - convert integer to string
  * @num: the given number
- *
  * Return: a pointer to the null-terminated string
  */
 char *convert_to_string(unsigned int num);
@@ -20,7 +18,6 @@ char *convert_to_string(unsigned int num);
 /**
  * calculate_length - calculate the number of digits in an integer
  * @num: the given number
- *
  * Return: the length of the integer
  */
 int calculate_length(int num);
@@ -28,28 +25,26 @@ int calculate_length(int num);
 /**
  * signal_handler - handle the process interrupt signal
  * @signo: the signal identifier
- *
  * Return: void
  */
 void signal_handler(int signo);
 
 /**
  * print_error - prints error message
- * @data: the data structure pointer
- *
+ * @d: the data structure pointer
  * Return: (Success) a positive number
- *         (Fail) a negative number
+ * (Fail) a negative number
  */
-int print_error(cmd_data *data)
+int print_error(command_data *d)
 {
-	char *index_str = convert_to_string(data->index);
+	char *index_str = convert_to_string(d->index);
 
-	_print("hsh: ");
-	_print(index_str);
-	_print(": ");
-	_print(data->args[0]);
-	_print(": ");
-	_print(data->error_msg);
+	print_out("hsh: ");
+	print_out(index_str);
+	print_out(": ");
+	print_out(d->args[0]);
+	print_out(": ");
+	print_out(d->error_msg);
 	free(index_str);
 	return (0);
 }
@@ -57,7 +52,6 @@ int print_error(cmd_data *data)
 /**
  * convert_to_string - convert integer to string
  * @num: the given number
- *
  * Return: a pointer to the null-terminated string
  */
 char *convert_to_string(unsigned int num)
@@ -80,7 +74,6 @@ char *convert_to_string(unsigned int num)
 /**
  * calculate_length - calculate the number of digits in an integer
  * @num: the given number
- *
  * Return: the length of the integer
  */
 int calculate_length(int num)
@@ -90,7 +83,7 @@ int calculate_length(int num)
 	if (num == 0)
 		return (1);
 
-	for (int temp = num; temp != 0; temp /= 10
+	for (int temp = num; temp != 0; temp /= 10)
 		length++;
 
 		return (length);
@@ -99,14 +92,13 @@ int calculate_length(int num)
 /**
  * signal_handler - handle the process interrupt signal
  * @signo: the signal identifier
- *
  * Return: void
  */
 void signal_handler(int signo)
 {
 	if (signo == SIGINT)
 	{
-		_print("\n");
-		_print(PROMPT);
+		print_out("\n");
+		print_out(PROMPT);
 	}
 }
