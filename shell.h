@@ -54,7 +54,7 @@ typedef struct builtin
 extern char **environ;
 
 int string_length(char *str);
-void print_out(char *outputstr);
+void print_out(char *outputstr, ...);
 char *string_dup(char *str);
 void reverse_array(char *array, int length);
 char *string_copy(char *destination, char *source);
@@ -67,7 +67,7 @@ int _bultin(command_data *d);
 int string_integer(char *cha);
 int builtin_handler(command_data *d);
 int help_displayer(command_data *d);
-int program_abort(void *d);
+int program_abort(command_data *d __attribute__((unused)));
 int directory_changer(command_data *d);
 
 void *fill_array(void *array, int element, unsigned int length);
@@ -103,7 +103,13 @@ int write_to_history(command_data *d __attribute__((unused)));
 int is_alphabetic(int character);
 int main(void);
 int readInput(command_data *d);
+<<<<<<< HEAD
 int process_cmd(command_data *d);
 >>>>>>> bc021ea058083abfa0e2980919e58e173c9d034c:shell.h
+=======
+int process_command(command_data *d);
+void signal_handler(int signo);
+int print_error(command_data *d);
+>>>>>>> 0f3cf1153355bd967a8ba385a86910daffb6ad71
 
 #endif

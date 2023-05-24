@@ -20,7 +20,7 @@ int help_displayer(command_data *d)
 		writting = write(STDOUT_FILENO, &k, reading);
 		if (writting < 0)
 		{
-			d->error_msg = _strup("permission denied\n");
+			d->error_msg = string_dup("permission denied\n");
 			return (-1);
 		}
 	}
@@ -32,7 +32,7 @@ int help_displayer(command_data *d)
  * @d: is a pointer to the data structure
  * Return: 0 (success) or -1 (failure)
  */
-int program_abort(command_data *d __attribute__ ((unused)))
+int program_abort(command_data *d __attribute__((unused)))
 {
 	int input, k;
 
@@ -60,16 +60,16 @@ int program_abort(command_data *d __attribute__ ((unused)))
  */
 int directory_changer(command_data *d)
 {
-	char *main;
+	char *home;
 	char *old;
 
-	home = get_environment_variable("MAIN");
+	home = get_environment_variables("HOME");
 	old = NULL;
 
 	if (!(d->args[1]))
 	{
 		print_out("change current directory to main directory\n");
-		if (chdir(main) < 0)
+		if (chdir(home) < 0)
 		{
 			print_out("failed to change directory\n");
 			return (-1);
@@ -107,7 +107,7 @@ int directory_changer(command_data *d)
  */
 int builtin_handler(command_data *d)
 {
-	built_t built[] = {
+	builtin_t built[] = {
 		{"exit", program_abort},
 		{"cd", directory_changer},
 		{"help", help_displayer},
@@ -116,8 +116,8 @@ int builtin_handler(command_data *d)
 
 	for (int k = 0; built[k].command != NULL; k++)
 	{
-		if (compare_string(d->args[0], built[k].command == 0)
+		if (compare_string(d->args[0], built[k].command) == 0)
 				return (built[k].handle(d));
 	}
-				return (-1);
+	return (-1);
 }
