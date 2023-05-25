@@ -22,7 +22,6 @@ int _pathfinder(command_data *d)
 void _short(command_data *d)
 {
 	char *start, *ticket, *end;
-	struct stat s;
 	int exit = 0;
 
 	start = get_environment_variables("PATH");

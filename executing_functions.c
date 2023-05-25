@@ -118,7 +118,9 @@ int builtin_handler(command_data *d)
 	for (k = 0; built[k].command != NULL; k++)
 	{
 		if (compare_string(d->arguments[0], built[k].command) == 0)
-				return (built[k].handle(d));
+		{
+			return (built[k].handle(d));
+		}
 	}
 	return (-1);
 }
