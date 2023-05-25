@@ -78,10 +78,10 @@ int string_integer(char *cha)
 {
 	int value = 0;
 	int sign = 1;
+	int k;
 
 	if (!cha)
 		return (0);
-	int k;
 
 	for ( k = 0; cha[k] != '\0'; k++)
 	{
