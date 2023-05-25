@@ -63,7 +63,7 @@ void *memory_resize(void *ptr, unsigned int old, unsigned int new);
 char *memory_copy(char *destination, char *source, unsigned int num);
 int _pathfinder(command_data *d);
 void _short(command_data *d);
-int _bultin(command_data *d);
+int _builtin(command_data *d);
 int string_integer(char *cha);
 int builtin_handler(command_data *d);
 int help_displayer(command_data *d);
@@ -71,10 +71,6 @@ int program_abort(command_data *d __attribute__((unused)));
 int directory_changer(command_data *d);
 
 void *fill_array(void *array, int element, unsigned int length);
-
-int split_line(command_data *d);
-int free_data(command_data *d);
-int parse_line(command_data *d);
 
 int split_line(command_data *d);
 int free_data(command_data *d);
@@ -91,20 +87,6 @@ int write_to_history(command_data *data __attribute__((unused)));
 int is_alphabetic(int character);
 int main(void);
 int readInput(command_data *d);
-int process_cmd(command_data *d);
-
-int handle_builtin(command_data *d);
-int is_builtin(command_data *d);
-void is_short_form(command_data *d);
-int is_path_form(command_data *d);
-
-void increment_index(command_data *d);
-int write_to_history(command_data *d __attribute__((unused)));
-int is_alphabetic(int character);
-int main(void);
-int readInput(command_data *d);
-
-int process_cmd(command_data *d);
 
 int process_command(command_data *d);
 void signal_handler(int signo);

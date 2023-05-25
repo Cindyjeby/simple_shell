@@ -87,7 +87,7 @@ int calculate_length(int num)
 		return (1);
 	for (temp = num; temp != 0; temp /= 10)
 		length++;
-	
+
 	return (length);
 }
 

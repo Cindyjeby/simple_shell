@@ -83,7 +83,7 @@ int string_integer(char *cha)
 	if (!cha)
 		return (0);
 
-	for ( k = 0; cha[k] != '\0'; k++)
+	for (k = 0; cha[k] != '\0'; k++)
 	{
 		if (cha[k] == '-')
 		{

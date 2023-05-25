@@ -8,35 +8,32 @@
  * Return: on success - a positive number
  *on failure - a negative number
  */
-
-int split_line(command_data *data)
-
-int split_line(command_data *d);
+int split_line(command_data *d)
 {
 	char *tkn;
 	size_t sz = TOKENSIZE, new_sz, i = 0;
 
 	if (compare_string(d->line, "\n") == 0)
 		return (-1);
-	d->args = malloc(sz * sizeof(char *));
-	if (d->args == NULL)
+	d->arguments = malloc(sz * sizeof(char *));
+	if (d->arguments == NULL)
 		return (-1);
 	tkn = strtok(d->line, DELIMITER);
 	while (tkn != NULL)
 	{
-		d->args[i++] = tkn;
+		d->arguments[i++] = tkn;
 		if (i + 2 >= sz)
 		{
 			new_sz = sz * 2;
-			d->args = memory_resize(d->args,
+			d->arguments = memory_resize(d->arguments,
 					sz * sizeof(char *), new_sz * sizeof(char *));
-			if (d->args == NULL)
+			if (d->arguments == NULL)
 				return (-1);
 			sz = new_sz;
 		}
 		tkn = strtok(NULL, DELIMITER);
 	}
-	d->args[i] = NULL;
+	d->arguments[i] = NULL;
 	return (0);
 }
 
@@ -48,16 +45,12 @@ int split_line(command_data *d);
  * Return: on success - positive number
  * on failure - negative number
  */
-
-int free_data(command_data *data)
-
-int free_data(command_data *d);
-
+int free_data(command_data *d)
 {
 	free(d->line);
 	d->line = NULL;
-	free(d->args);
-	d->args = NULL;
+	free(d->arguments);
+	d->arguments = NULL;
 	free(d->command);
 	d->command = NULL;
 	free(d->error_msg);
@@ -73,11 +66,7 @@ int free_data(command_data *d);
  * Return: on success - a positive number
  * on failure - a negative number
  */
-
-int parse_line(command_data *data)
-
-int parse_line(command_data *d);
-
+int parse_line(command_data *d)
 {
 	while (_pathfinder(d) > 0)
 		return (1);

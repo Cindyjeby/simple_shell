@@ -20,7 +20,7 @@ int string_length(char *str)
  * @outputstr: string to be printed
  * Return: 0 (sucess) -1 (failure)
  */
-void print_out(char *outputstr)
+void print_out(char *outputstr, ...)
 {
 	int length = 0;
 

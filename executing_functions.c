@@ -114,6 +114,7 @@ int builtin_handler(command_data *d)
 		{NULL, NULL}
 	};
 	int k;
+
 	for (k = 0; built[k].command != NULL; k++)
 	{
 		if (compare_string(d->arguments[0], built[k].command) == 0)
