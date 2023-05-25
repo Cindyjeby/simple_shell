@@ -42,7 +42,7 @@ int print_error(command_data *d)
 	print_out("hsh: ");
 	print_out(index_str);
 	print_out(": ");
-	print_out(d->args[0]);
+	print_out(d->arguments[0]);
 	print_out(": ");
 	print_out(d->error_msg);
 	free(index_str);
@@ -59,11 +59,13 @@ char *convert_to_string(unsigned int num)
 	int len = calculate_length(num);
 	char *str = malloc(len + 1);
 
+	int i;
+
 	if (!str)
 		return (NULL);
 
 	str[len] = '\0';
-	for (int i = len - 1; i >= 0; i--)
+	for (i = len - 1; i >= 0; i--)
 	{
 		str[i] = (num % 10) + '0';
 		num /= 10;
@@ -79,14 +81,14 @@ char *convert_to_string(unsigned int num)
 int calculate_length(int num)
 {
 	int length = 0;
+	int temp;
 
 	if (num == 0)
 		return (1);
-
-	for (int temp = num; temp != 0; temp /= 10)
+	for (temp = num; temp != 0; temp /= 10)
 		length++;
-
-		return (length);
+	
+	return (length);
 }
 
 /**

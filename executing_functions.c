@@ -9,7 +9,7 @@ int help_displayer(command_data *d)
 	int reading, writting, fd = 1;
 	char k;
 
-	fd = open(d->args[1], O_RDONLY);
+	fd = open(d->arguments[1], O_RDONLY);
 	if (fd < 0)
 	{
 		d->error_msg = string_dup("No Match\n");
@@ -36,20 +36,20 @@ int program_abort(command_data *d __attribute__((unused)))
 {
 	int input, k;
 
-	if (!(d->args[1]))
+	if (!(d->arguments[1]))
 	{
 		free_data(d);
 		exit(errno);
 	}
-	for (k = 0; d->args[1][k]; k++)
+	for (k = 0; d->arguments[1][k]; k++)
 	{
-		if (!is_alphabetic(d->args[1][k]))
+		if (!is_alphabetic(d->arguments[1][k]))
 		{
 			d->error_msg = string_dup("wrong number\n");
 			return (-1);
 		}
 	}
-	input = string_integer(d->args[1]);
+	input = string_integer(d->arguments[1]);
 	free_data(d);
 	exit(input);
 }
@@ -66,7 +66,7 @@ int directory_changer(command_data *d)
 	home = get_environment_variables("HOME");
 	old = NULL;
 
-	if (!(d->args[1]))
+	if (!(d->arguments[1]))
 	{
 		print_out("change current directory to main directory\n");
 		if (chdir(home) < 0)
@@ -75,7 +75,7 @@ int directory_changer(command_data *d)
 			return (-1);
 		}
 	}
-	else if (compare_string(d->args[1], "-") == 0)
+	else if (compare_string(d->arguments[1], "-") == 0)
 	{
 		if (!old)
 		{
@@ -91,10 +91,10 @@ int directory_changer(command_data *d)
 	}
 		else
 		{
-			print_out("changing directory to %s\n", d->args[1]);
-			if (chdir(d->args[1]) < 0)
+			print_out("changing directory to %s\n", d->arguments[1]);
+			if (chdir(d->arguments[1]) < 0)
 			{
-				print_out("Error: changing directory%s\n", d->args[1]);
+				print_out("Error: changing directory%s\n", d->arguments[1]);
 				return (-1);
 			}
 		}
@@ -113,10 +113,10 @@ int builtin_handler(command_data *d)
 		{"help", help_displayer},
 		{NULL, NULL}
 	};
-
-	for (int k = 0; built[k].command != NULL; k++)
+	int k;
+	for (k = 0; built[k].command != NULL; k++)
 	{
-		if (compare_string(d->args[0], built[k].command) == 0)
+		if (compare_string(d->arguments[0], built[k].command) == 0)
 				return (built[k].handle(d));
 	}
 	return (-1);

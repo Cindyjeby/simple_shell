@@ -21,7 +21,7 @@
  * @old: previous working directory
  * @command: actual command
  * @index: index of the command run by shell
- * @args: the arguments of the command
+ * @arguments: the arguments of the command
  * @env: the environment
  * @line: is the address of the input data
  * @error_msg: stores the error messages
@@ -72,9 +72,9 @@ int directory_changer(command_data *d);
 
 void *fill_array(void *array, int element, unsigned int length);
 
-int split_line(command_data *data);
-int free_data(command_data *data);
-int parse_line(command_data *data);
+int split_line(command_data *d);
+int free_data(command_data *d);
+int parse_line(command_data *d);
 
 int split_line(command_data *d);
 int free_data(command_data *d);
@@ -86,17 +86,17 @@ int _strcmp(char *s1, char *s2);
 int compare_string(char *string1, char *string2);
 char *get_environment_variables(char *variable_name);
 
-void increment_index(command_data *data);
+void increment_index(command_data *d);
 int write_to_history(command_data *data __attribute__((unused)));
 int is_alphabetic(int character);
 int main(void);
-int readInput(command_data *data);
-int process_cmd(command_data *data);
+int readInput(command_data *d);
+int process_cmd(command_data *d);
 
-int handle_builtin(command_data *data);
-int is_builtin(command_data *data);
-void is_short_form(command_data *data);
-int is_path_form(command_data *data);
+int handle_builtin(command_data *d);
+int is_builtin(command_data *d);
+void is_short_form(command_data *d);
+int is_path_form(command_data *d);
 
 void increment_index(command_data *d);
 int write_to_history(command_data *d __attribute__((unused)));

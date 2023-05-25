@@ -6,9 +6,9 @@
  */
 int _pathfinder(command_data *d)
 {
-	if (_strchr(d->args[0], '/') != NULL)
+	if (_strchr(d->arguments[0], '/') != NULL)
 	{
-		d->command = string_dup(d->args[0]);
+		d->command = string_dup(d->arguments[0]);
 		return (1);
 	}
 	return (-1);
@@ -31,7 +31,7 @@ void _short(command_data *d)
 
 	while (ticket)
 	{
-		if (compare_string(ticket, d->args[0]) == 0)
+		if (compare_string(ticket, d->arguments[0]) == 0)
 		{
 			exit = 1;
 			break;
@@ -41,7 +41,7 @@ void _short(command_data *d)
 	}
 	if (!exit)
 	{
-		d->command = string_dup(d->args[0]);
+		d->command = string_dup(d->arguments[0]);
 	}
 	free(end);
 }
@@ -63,7 +63,7 @@ int _builtin(command_data *d)
 
 	while (builtins[k] != NULL)
 	{
-		if (compare_string(d->args[0], builtins[k]) == 0)
+		if (compare_string(d->arguments[0], builtins[k]) == 0)
 			return (1);
 		k++;
 	}
@@ -81,8 +81,9 @@ int string_integer(char *cha)
 
 	if (!cha)
 		return (0);
+	int k;
 
-	for (int k = 0; cha[k] != '\0'; k++)
+	for ( k = 0; cha[k] != '\0'; k++)
 	{
 		if (cha[k] == '-')
 		{

@@ -112,7 +112,7 @@ int process_command(command_data *d)
 		signal(SIGINT, SIG_DFL);
 
 		/* Execute the command */
-		if (execve(d->command, d->args, environ) < 0)
+		if (execve(d->command, d->arguments, environ) < 0)
 		{
 			d->error_msg = string_dup("not found\n");
 			return (-1);

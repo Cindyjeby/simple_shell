@@ -8,11 +8,10 @@
  * Return: on success - a positive number
  *on failure - a negative number
  */
-<<<<<<< HEAD
+
 int split_line(command_data *data)
-=======
-int split_line(command_data *d)
->>>>>>> bc021ea058083abfa0e2980919e58e173c9d034c
+
+int split_line(command_data *d);
 {
 	char *tkn;
 	size_t sz = TOKENSIZE, new_sz, i = 0;
@@ -49,11 +48,11 @@ int split_line(command_data *d)
  * Return: on success - positive number
  * on failure - negative number
  */
-<<<<<<< HEAD
+
 int free_data(command_data *data)
-=======
-int free_data(command_data *d)
->>>>>>> bc021ea058083abfa0e2980919e58e173c9d034c
+
+int free_data(command_data *d);
+
 {
 	free(d->line);
 	d->line = NULL;
@@ -74,11 +73,11 @@ int free_data(command_data *d)
  * Return: on success - a positive number
  * on failure - a negative number
  */
-<<<<<<< HEAD
+
 int parse_line(command_data *data)
-=======
-int parse_line(command_data *d)
->>>>>>> bc021ea058083abfa0e2980919e58e173c9d034c
+
+int parse_line(command_data *d);
+
 {
 	while (_pathfinder(d) > 0)
 		return (1);
