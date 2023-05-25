@@ -1,13 +1,13 @@
 #include "shell.h"
 
 /**
- * compare_strings - compare two strings
+ * compare_string - compare two strings
  * @string1: the first given string
  * @string2: the second given string
  * Return: (Success) a positive number
  * (Fail) a negative number
  */
-int compare_strings(char *string1, char *string2)
+int compare_string(char *string1, char *string2)
 {
 	int cmp = 0, i;
 
@@ -27,12 +27,12 @@ int compare_strings(char *string1, char *string2)
 }
 
 /**
- * get_environment_variable - gets the value of an environment variable
+ * get_environment_variables - gets the value of an environment variable
  * @variable_name: the name of the environment variable
  * Return: (Success) a pointer to the value of the variable
  * (Fail) NULL
  */
-char *get_environment_variable(char *variable_name)
+char *get_environment_variables(char *variable_name)
 {
 	char **environment_cursor, *env_ptr, *name_ptr;
 
